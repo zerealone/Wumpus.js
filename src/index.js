@@ -1,22 +1,19 @@
-var prints = "";
-var nodeVers = "";
-var final = "";
-var version = process.version;
-exports.run = function({code}){
 
-    if(code.includes('#NodeVersion')==true){
-        nodeVers = code.replaceAll('#NodeVersion', `${version}`);
-        final = nodeVers;
-    } else if (code.includes('SendToConsole')==true){
-        prints = code.replaceAll('SendToConsole', 'console.log');
-        final = prints;
-    }
+//const fs = require("fs"); may be in the next update, the code will be in another file.
 
-    if(both = true && code.includes('#NodeVersion') && code.includes('SendToConsole')==true){
-       prints = code.replaceAll('SendToConsole', 'console.log');
-       nodeVers = prints.replaceAll('#NodeVersion', `${version}`);
-       final = nodeVers;
-    }
-        //console.log(final)
+var prints = ""; //the prints
+var nodeVers = ""; //the version of the node
+var final = ""; //the final output of the "code"
+var vars = ""; //the variables that are in the code
+var varsUse = ""; //the use of the variables
+
+exports.run = function({code}){ //the main run function
+       prints = code.replaceAll('SendToConsole', 'console.log'); //the prints are being replaced to the js syntax
+       nodeVers = prints.replaceAll('#NodeVersion', `${process.version}`); //the node version is being replaced
+       vars = nodeVers.replaceAll('<var.create>', `var`); //the vars are being replaced to the js syntax
+       varsUse = vars.replaceAll('<var.use>', ``) //the using of the vars are being replaced to the js syntax
+       final = varsUse; //the final output
+        //this is for debugging : console.log(final);
         eval(final);
+
 }
