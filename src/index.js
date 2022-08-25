@@ -15,5 +15,4 @@ exports.run = function({code}){ //the main run function
        final = varsUse; //the final output
         //this is for debugging : console.log(final);
         eval(final);
-
 }
